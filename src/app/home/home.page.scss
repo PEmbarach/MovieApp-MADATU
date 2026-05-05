@@ -25,3 +25,8 @@
 #container a {
   text-decoration: none;
 }
+
+::ng-deep ion-card img{
+  width: 150px;
+  height: auto
+}
