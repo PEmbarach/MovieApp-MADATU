@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { heart } from 'ionicons/icons';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   IonCard,
   IonCardContent,
@@ -36,7 +37,7 @@ export class HomePage implements OnInit {
   imageBaseUrl: string = environment.apiImageUrl;
   searchQuery:string = '';
 
-  constructor(private movie: MovieService) {
+  constructor(private movie: MovieService, private router:Router) {
     addIcons({ heart });
   }
 
@@ -56,6 +57,14 @@ export class HomePage implements OnInit {
         this.movies = data.results;
       });
     }
+  }
+
+  goToMovieDetails(movie: any){
+    this.router.navigate(['/movie-details'], { state: { movie: movie }});
+  }
+
+  goToFavourites(){
+    this.router.navigate(['/favourites']);
   }
 
 }

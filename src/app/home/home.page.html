@@ -4,7 +4,7 @@
       G00473364
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button fill="clear">
+      <ion-button fill="clear" (click)="goToFavourites()">
         <ion-icon slot="icon-only" name="heart" color="medium"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -20,7 +20,7 @@
   <ion-card-header>
     <ion-card-title>Today's Trending Movies</ion-card-title>
   </ion-card-header>
-  <ion-card *ngFor="let m of movies">
+  <ion-card *ngFor="let m of movies" (click)="goToMovieDetails(m)">
     <img alt="Movie Poster" [src]='imageBaseUrl + m.poster_path'/>
     <ion-card-content>
       {{m.overview}}
