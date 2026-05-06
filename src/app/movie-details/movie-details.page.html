@@ -1,13 +1,44 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>movie-details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="goToHomePage()">
+        <ion-icon slot="icon-only" name="home-outline" color="medium"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="goToFavourites()">
+        <ion-icon slot="icon-only" name="heart" color="medium"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">movie-details</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-title size="large">{{movie?.title}}</ion-title>
+  </ion-toolbar>
+  <ion-card>
+    <ion-card-content>
+      {{movie?.overview}}
+    </ion-card-content>
+  </ion-card>
+  <ion-title>Cast</ion-title>
+  <ion-card *ngFor="let c of cast">
+    <img alt="Movie Poster" [src]='imageBaseUrl + c.profile_path' />
+    <ion-card-content>
+      <strong>{{c.character}}</strong>
+    </ion-card-content>
+    <ion-card-content>
+      {{c.name}}
+    </ion-card-content>
+  </ion-card>
+  <ion-title>Crew</ion-title>
+  <ion-card *ngFor="let cw of crew">
+    <img alt="Movie Poster" [src]='imageBaseUrl + cw.profile_path' />
+    <ion-card-content>
+      <strong>{{cw.job}}</strong>
+    </ion-card-content>
+    <ion-card-content>
+      {{cw.name}}
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonImg, IonButton, IonIcon, IonButtons, IonList, IonInput, IonItem } from '@ionic/angular/standalone';
+//import { IonHeader, IonToolbar, IonTitle, IonContent, IonImg, IonButton, IonIcon, IonButtons, IonList, IonInput, IonItem } from '@ionic/angular/standalone';
 import { MovieService } from '../services/MovieService';
 import { environment } from 'src/environments/environment';
 import { CommonModule } from '@angular/common';
@@ -15,6 +15,17 @@ import {
   IonCardTitle,
   IonLabel,
   IonThumbnail,
+  IonHeader, 
+  IonToolbar, 
+  IonTitle, 
+  IonContent, 
+  IonImg, 
+  IonButton, 
+  IonIcon, 
+  IonButtons, 
+  IonList, 
+  IonInput, 
+  IonItem
 } from '@ionic/angular/standalone';
 
 
