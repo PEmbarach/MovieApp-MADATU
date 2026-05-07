@@ -23,7 +23,7 @@
   </ion-card>
   <ion-title>Cast</ion-title>
   <ion-card *ngFor="let c of cast" (click)="goToPersonDetails(c)">
-    <img alt="Movie Poster" [src]='imageBaseUrl + c.profile_path' />
+    <img alt="Person Photo" [src]='imageBaseUrl + c.profile_path' />
     <ion-card-content>
       <strong>{{c.character}}</strong>
     </ion-card-content>
@@ -33,7 +33,7 @@
   </ion-card>
   <ion-title>Crew</ion-title>
   <ion-card *ngFor="let cw of crew" (click)="goToPersonDetails(cw)">
-    <img alt="Movie Poster" [src]='imageBaseUrl + cw.profile_path' />
+    <img alt="Crew Photo" [src]='imageBaseUrl + cw.profile_path' />
     <ion-card-content>
       <strong>{{cw.job}}</strong>
     </ion-card-content>

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { MovieService } from '../services/MovieService';
-import { addIcons } from 'ionicons';
+import { addIcons,  } from 'ionicons';
 import { heart, homeOutline } from 'ionicons/icons';
 import {
   IonCard,
@@ -48,7 +48,8 @@ export class MovieDetailsPage implements OnInit {
   
   constructor(private movieService: MovieService, private router:Router) {
     this.movie = this.router.getCurrentNavigation()?.extras.state?.['movie'];
-   }
+    addIcons({heart, homeOutline})
+  }
 
   ngOnInit() {
     this.movieService.getMovieCredits(this.movie.id).subscribe((data:any) =>{

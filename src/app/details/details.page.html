@@ -1,13 +1,40 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>details</ion-title>
+    <ion-title>{{person?.name}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="goToHomePage()">
+        <ion-icon slot="icon-only" name="home-outline" color="medium"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="goToFavourites()">
+        <ion-icon slot="icon-only" name="heart" color="medium"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">details</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div *ngIf="person?.profile_path">
+    <ion-img alt="Person Photo" [src]='imageBaseUrl + person.profile_path' />
+  </div>
+  <div *ngIf="!person?.profile_path">
+    <p>No Image</p>
+  </div>
+  <ion-card-content>
+    <strong>{{person?.name}}</strong>
+  </ion-card-content>
+  <ion-card>
+    <ion-card-content>
+      <strong *ngIf="person?.birthday">{{person.birthday}}</strong>
+      <strong *ngIf="person?.deathday">{{person.deathday}}</strong>
+      <p *ngIf="person?.also_known_as">{{person.also_known_as}}</p>
+      <br>
+      <p *ngIf="person?.biography">{{person.biography}}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngFor="let cd of credits" (click)="goToMovieDetails(cd)">
+    <img slot="end" alt="Movie Poster" [src]='imageBaseUrl + cd.poster_path'/>
+    <ion-card-content>
+      {{cd.title}}
+    </ion-card-content>
+  </ion-card>
 </ion-content>
