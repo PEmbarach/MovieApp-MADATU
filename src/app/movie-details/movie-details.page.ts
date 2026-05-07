@@ -57,6 +57,10 @@ export class MovieDetailsPage implements OnInit {
     })
   }
 
+  goToPersonDetails(person:any){
+    this.router.navigate(['/details'], { state: {person:person}})
+  }
+
   goToFavourites(){
     this.router.navigate(['/favourites']);
   }
