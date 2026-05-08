@@ -32,9 +32,11 @@
     </ion-card-content>
   </ion-card>
   <ion-card *ngFor="let cd of credits" (click)="goToMovieDetails(cd)">
-    <img slot="end" alt="Movie Poster" [src]='imageBaseUrl + cd.poster_path'/>
-    <ion-card-content>
-      {{cd.title}}
-    </ion-card-content>
+    <ion-item>
+      <ion-label>{{cd.title}}</ion-label>
+      <ion-thumbnail slot="end">
+        <img alt="Movie Poster" [src]='imageBaseUrl + cd.poster_path'/>
+      </ion-thumbnail>
+    </ion-item>
   </ion-card>
 </ion-content>
