@@ -29,10 +29,9 @@ export class FavoritesService {
     return await this.storage.get('favourites') || [];
   }
 
-  isFavourite(movieID: number) { 
+  async isFavourite(movieID: number) { 
     const favourites = await this.getFavourites();
-    const update = favourites.filter((m: any) => m.id !== movieID);
-    await this.storage.set('favourites', update);
+    return favourites.some((m: any) => m.id == movieID);
   }
 
 }
