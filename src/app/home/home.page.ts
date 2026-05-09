@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-//import { IonHeader, IonToolbar, IonTitle, IonContent, IonImg, IonButton, IonIcon, IonButtons, IonList, IonInput, IonItem } from '@ionic/angular/standalone';
 import { MovieService } from '../services/MovieService';
 import { environment } from 'src/environments/environment';
 import { CommonModule } from '@angular/common';
@@ -7,6 +6,7 @@ import { addIcons } from 'ionicons';
 import { heart } from 'ionicons/icons';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DataService } from '../services/DataService';
 import {
   IonCard,
   IonCardContent,
@@ -48,7 +48,7 @@ export class HomePage implements OnInit {
   imageBaseUrl: string = environment.apiImageUrl;
   searchQuery:string = '';
 
-  constructor(private movie: MovieService, private router:Router) {
+  constructor(private movie: MovieService, private router:Router, private dataService:DataService) {
     addIcons({ heart });
   }
 
@@ -70,8 +70,9 @@ export class HomePage implements OnInit {
     }
   }
 
-  goToMovieDetails(movie: any){
-    this.router.navigate(['/movie-details'], { state: { movie: movie }});
+  goToMovieDetails(movie: any) {
+    this.dataService.selectedMovie = movie;
+    this.router.navigate(['/movie-details']);
   }
 
   goToFavourites(){

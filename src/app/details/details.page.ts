@@ -6,6 +6,8 @@ import { MovieService } from '../services/MovieService';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { heart, homeOutline } from 'ionicons/icons';
+import { DataService } from '../services/DataService';
+import { ViewWillEnter } from '@ionic/angular';
 import {
   IonCard,
   IonCardContent,
@@ -40,23 +42,23 @@ import {
     IonCardHeader, IonCardSubtitle, IonCardTitle,
     IonLabel, IonThumbnail, CommonModule, FormsModule]
 })
-export class DetailsPage implements OnInit {
+export class DetailsPage implements ViewWillEnter {
   person:any = [];
   credits:any[] = [];
   imageBaseUrl: string = environment.apiImageUrl;
 
-  constructor(private movieService: MovieService, private router:Router) { 
-    this.person = this.router.getCurrentNavigation()?.extras.state?.['person'];
+  constructor(private movieService: MovieService, private router:Router, private dataService:DataService) { 
     addIcons({heart, homeOutline})
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
+    this.person = this.dataService.selectedPerson;
     this.movieService.getPersonDetails(this.person.id).subscribe((data:any) => {
       this.person = data;
-    })
-    this.movieService.getPersonMovieCredits(this.person.id).subscribe((data:any) =>{
+    });
+    this.movieService.getPersonMovieCredits(this.person.id).subscribe((data:any) => {
       this.credits = data.cast;
-    })
+    });
   }
 
   goToFavourites(){
@@ -68,6 +70,7 @@ export class DetailsPage implements OnInit {
   }
 
   goToMovieDetails(movie: any){
-    this.router.navigate(['/movie-details'], { state: { movie: movie }});
+    this.dataService.selectedMovie = movie;
+    this.router.navigate(['/movie-details']);
   }
 }
