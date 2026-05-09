@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>movie-details</ion-title>
+    <ion-title size="large">{{movie?.title}}</ion-title>
     <ion-buttons slot="end">
       <ion-button fill="clear" (click)="goToHomePage()">
         <ion-icon slot="icon-only" name="home-outline" color="medium"></ion-icon>
@@ -13,14 +13,19 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-toolbar>
-    <ion-title size="large">{{movie?.title}}</ion-title>
-  </ion-toolbar>
-  <ion-card>
     <ion-card-content>
       {{movie?.overview}}
     </ion-card-content>
-  </ion-card>
+  <ion-buttons>
+    <ion-button fill="outline" color="primary" (click)="addToFavourites()" *ngIf="!isFavourite">
+      <ion-icon slot="start" name="heart" color="primary"></ion-icon>
+      ADD TO FAVOURITES
+    </ion-button>
+    <ion-button fill="outline" color="primary" (click)="removeFromFavourites()" *ngIf="isFavourite">
+      <ion-icon slot="start" name="heart" color="primary"></ion-icon>
+      REMOVE FROM FAVOURITES
+    </ion-button>
+  </ion-buttons>
   <ion-title>Cast</ion-title>
   <ion-card *ngFor="let c of cast" (click)="goToPersonDetails(c)">
     <img alt="Person Photo" [src]='imageBaseUrl + c.profile_path' />
