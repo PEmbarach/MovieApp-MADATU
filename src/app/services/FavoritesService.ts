@@ -1,32 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage-angular';
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FavoritesService {
-  constructor(private storage: Storage) {
-    this.init();
-  }
-
-  async init() {
-    await this.storage.create();
+  constructor() {
   }
 
   async addFavourites(movie: any) {
     const favourites = await this.getFavourites();
     favourites.push(movie);
-    await this.storage.set('favourites', favourites);
+    await Preferences.set({ key: 'favourites', value: JSON.stringify(favourites) });
   }
 
   async removeFavoutire(movieID: number) {
     const favourites = await this.getFavourites();
     const update = favourites.filter((m: any) => m.id !== movieID);
-    await this.storage.set('favourites', update);
+    await Preferences.set({ key: 'favourites', value: JSON.stringify(update) });
   }
 
   async getFavourites() {
-    return await this.storage.get('favourites') || [];
+    const result = await Preferences.get({ key: 'favourites' });
+    return result.value ? JSON.parse(result.value) : [];
   }
 
   async isFavourite(movieID: number) { 
