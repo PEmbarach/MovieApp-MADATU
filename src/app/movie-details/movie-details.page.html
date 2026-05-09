@@ -28,7 +28,8 @@
   </ion-buttons>
   <ion-title>Cast</ion-title>
   <ion-card *ngFor="let c of cast" (click)="goToPersonDetails(c)">
-    <img alt="Person Photo" [src]='imageBaseUrl + c.profile_path' />
+    <img alt="Person Photo" [src]='imageBaseUrl + c.profile_path' (error)="c.profile_path = null" *ngIf="c.profile_path"/>
+    <p *ngIf="!c.profile_path">No Image</p>
     <ion-card-content>
       <strong>{{c.character}}</strong>
     </ion-card-content>
@@ -38,7 +39,8 @@
   </ion-card>
   <ion-title>Crew</ion-title>
   <ion-card *ngFor="let cw of crew" (click)="goToPersonDetails(cw)">
-    <img alt="Crew Photo" [src]='imageBaseUrl + cw.profile_path' />
+    <img alt="Crew Photo" [src]='imageBaseUrl + cw.profile_path' (error)="cw.profile_path = null" *ngIf="cw.profile_path" />
+    <p *ngIf="!cw.profile_path">No Image</p>
     <ion-card-content>
       <strong>{{cw.job}}</strong>
     </ion-card-content>

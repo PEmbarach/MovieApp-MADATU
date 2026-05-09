@@ -25,7 +25,8 @@ import {
   IonButtons, 
   IonList, 
   IonInput, 
-  IonItem
+  IonItem,
+  IonSpinner,
 } from '@ionic/angular/standalone';
 
 
@@ -40,32 +41,38 @@ import {
     IonList, IonInput, IonItem, 
     FormsModule,  IonCard, IonCardContent,
     IonCardHeader, IonCardSubtitle, IonCardTitle,
-    IonLabel, IonThumbnail,
+    IonLabel, IonThumbnail, IonSpinner
   ],
 })
 export class HomePage implements OnInit {
   movies:any[] = [];
   imageBaseUrl: string = environment.apiImageUrl;
   searchQuery:string = '';
+  isLoading:boolean = false;
 
   constructor(private movie: MovieService, private router:Router, private dataService:DataService) {
     addIcons({ heart });
   }
 
   ngOnInit(){
+    this.isLoading = true;
     this.movie.getTrendingMovies().subscribe((data:any) => {
       this.movies = data.results; 
+      this.isLoading = false;
     });
   }
 
   onSearch(){
+    this.isLoading = true;
     if (this.searchQuery == '') {
       this.movie.getTrendingMovies().subscribe((data:any) =>{
         this.movies = data.results;
+        this.isLoading = false;
       });
     } else {
       this.movie.searchMovies(this.searchQuery).subscribe((data:any) =>{
         this.movies = data.results;
+        this.isLoading = false;
       });
     }
   }

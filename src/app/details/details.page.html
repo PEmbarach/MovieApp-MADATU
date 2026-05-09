@@ -14,7 +14,8 @@
 
 <ion-content [fullscreen]="true">
   <div *ngIf="person?.profile_path">
-    <ion-img alt="Person Photo" [src]='imageBaseUrl + person.profile_path' />
+    <ion-img alt="Person Photo" [src]='imageBaseUrl + person.profile_path' (error)="person.profile_path = null" *ngIf="person.profile_path"/>
+    <p *ngIf="!person.profile_path">No Image</p>
   </div>
   <div *ngIf="!person?.profile_path">
     <p>No Image</p>

@@ -12,6 +12,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-spinner *ngIf="isLoading"></ion-spinner>
   <ion-item>
     <ion-input label="Search" placeholder="Movie Name" [(ngModel)]="searchQuery">
     </ion-input>
