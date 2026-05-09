@@ -1,13 +1,25 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>favourites</ion-title>
+    <ion-title>Favourites Movies</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="goToHomePage()">
+        <ion-icon slot="icon-only" name="home-outline" color="medium"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">favourites</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+  <ion-card *ngFor="let f of favourites">
+    <img alt="Movie Poster" [src]='imageBaseUrl + f.poster_path' />
+    <ion-card-content>
+      {{f.title}}
+    </ion-card-content>
+    <ion-buttons>
+      <ion-button fill="outline" color="primary" (click)="goToMovieDetails(f)">
+        <ion-icon slot="start" name="heart" color="primary"></ion-icon>
+        DETAILS
+      </ion-button>
+    </ion-buttons>
+  </ion-card>
+</ion-content>  
