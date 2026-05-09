@@ -14,7 +14,7 @@
 <ion-content [fullscreen]="true">
   <ion-spinner *ngIf="isLoading"></ion-spinner>
   <ion-item>
-    <ion-input label="Search" placeholder="Movie Name" [(ngModel)]="searchQuery">
+    <ion-input label="Search" placeholder="Movie Name" [(ngModel)]="searchQuery" (keyup.enter)="onSearch()">
     </ion-input>
   </ion-item>
   <ion-button expand="full" (click)="onSearch()">Search</ion-button>
@@ -23,6 +23,11 @@
   </ion-card-header>
   <ion-card *ngFor="let m of movies" (click)="goToMovieDetails(m)">
     <img alt="Movie Poster" [src]='imageBaseUrl + m.poster_path'/>
+    <ion-card-content>
+      <strong>Release Year: {{m.release_date | slice:0:4}}</strong>
+      <br>
+      <strong>Rate:{{m.vote_average | number:'1.1-1'}}⭐</strong>
+    </ion-card-content>
     <ion-card-content>
       {{m.overview}}
     </ion-card-content>

@@ -1,0 +1,5 @@
+Innovation applied
+
+1 - Release Year — displayed on movie cards and movie details page using the slice pipe on release_date
+2 - Vote Rating — displayed using the number pipe on vote_average
+3 - Search on Enter Key — implemented using keyup.enter event on the search input
